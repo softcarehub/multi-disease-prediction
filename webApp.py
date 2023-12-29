@@ -3,11 +3,11 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 
 #Loading the saved models
-diabetes_model = pickle.load(open("C:\\Users\\mdbar\\Desktop\\multi-disease-prediction\\Diabetes_RandomForest_model.sav",'rb'))
+diabetes_model = pickle.load(open("/workspaces/multi-disease-prediction/Diabetes_RandomForest_model.sav",'rb'))
 
-heart_disease_model = pickle.load(open("C:\\Users\\mdbar\\Desktop\\multi-disease-prediction\\heart_Adaboost_model.sav","rb"))
+heart_disease_model = pickle.load(open("/workspaces/multi-disease-prediction/heart_Adaboost_model.sav","rb"))
 
-parkinsons_model = pickle.load(open("C:\\Users\\mdbar\\Desktop\\multi-disease-prediction\\parkinsons_Stacking_Ensemble_model.sav","rb"))
+parkinsons_model = pickle.load(open("/workspaces/multi-disease-prediction/parkinsons_Stacking_Ensemble_model.sav","rb"))
 
 
 with st.sidebar:
