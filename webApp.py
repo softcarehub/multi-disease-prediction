@@ -31,20 +31,32 @@ if(selected == 'Diabetes Prediction'):
 
     # Input fields in the first column
     with col1:
-        Pregnancies = st.number_input('Number of Pregnancies')
-        Glucose = st.number_input('Glucose Level')
-        BloodPressure = st.number_input('Blood Pressure value')
+        Pregnancies = st.text_input('Number of Pregnancies')
+        Glucose = st.text_input('Glucose Level')
+        BloodPressure = st.text_input('Blood Pressure value')
 
     # Input fields in the second column
     with col2:
-        SkinThickness = st.number_input('Skin Thickness value')
-        Insulin = st.number_input('Insulin Level')
-        BMI = st.number_input('BMI value')
+        SkinThickness = st.text_input('Skin Thickness value')
+        Insulin = st.text_input('Insulin Level')
+        BMI = st.text_input('BMI value')
     # Input fields in the third column
     with col3:
-        DiabetesPedigreeFunction = st.number_input('Diabetes Pedigree Function value')
-        Age = st.number_input('Age of the Person')
+        DiabetesPedigreeFunction = st.text_input('Diabetes Pedigree Function value')
+        Age = st.text_input('Age of the Person')
     
+    # Convert input values to numeric types
+    try:
+        Pregnancies = float(Pregnancies)
+        Glucose = float(Glucose)
+        BloodPressure = float(BloodPressure)
+        SkinThickness = float(SkinThickness)
+        Insulin = float(Insulin)
+        BMI = float(BMI)
+        DiabetesPedigreeFunction = float(DiabetesPedigreeFunction)
+        Age = float(Age)
+    except ValueError:
+        st.error('Please enter valid numeric values.')
     #Code for prediction
     diab_diagnosis = ''
     
@@ -76,27 +88,43 @@ if(selected == 'Heart Disease Prediction'):
 
     # Input fields in the first column
     with col1:
-        age = st.number_input('Age of the Person')
-        sex = st.number_input('Sex of the Person')
-        cp = st.number_input('Chest pain types')
-        trestbps = st.number_input('Resting Blood Pressure')
+        age = st.text_input('Age of the Person')
+        sex = st.text_input('Sex of the Person')
+        cp = st.text_input('Chest pain types')
+        trestbps = st.text_input('Resting Blood Pressure')
 
     # Input fields in the second column
     with col2:
-        chol = st.number_input('Serum Cholestoral in mg/dl')
-        fbs = st.number_input('Fasting blood sugar > 120 mg/dl')
-        restecg = st.number_input('Resting Electrocardiographic results')
-        thalach = st.number_input('Maximum Heart Rate achieved')
+        chol = st.text_input('Serum Cholestoral in mg/dl')
+        fbs = st.text_input('Fasting blood sugar > 120 mg/dl')
+        restecg = st.text_input('Resting Electrocardiographic results')
+        thalach = st.text_input('Maximum Heart Rate achieved')
 
     # Input fields in the third column
     with col3:
-        exang = st.number_input('Exercise Induced Angina')
-        oldpeak = st.number_input('ST depression induced by exercise')
-        slope = st.number_input('Slope of the peak exercise ST segment')
-        ca = st.number_input('Major vessels colored by flourosopy')
-        thal = st.number_input('thal: 0 = normal; 1 = fixed defect; 2 = reversible defect')
+        exang = st.text_input('Exercise Induced Angina')
+        oldpeak = st.text_input('ST depression induced by exercise')
+        slope = st.text_input('Slope of the peak exercise ST segment')
+        ca = st.text_input('Major vessels colored by flourosopy')
+        thal = st.text_input('thal: 0 = normal; 1 = fixed defect; 2 = reversible defect')
     
-    
+    # Convert input values to numeric types
+    try:
+        age = float(age)
+        sex = float(sex)
+        cp = float(cp)
+        trestbps = float(trestbps)
+        chol = float(chol)
+        fbs = float(fbs)
+        restecg = float(restecg)
+        thalach = float(thalach)
+        exang = float(exang)
+        oldpeak = float(oldpeak)
+        slope = float(slope)
+        ca = float(ca)
+        thal = float(thal)
+    except ValueError:
+        st.error('Please enter valid numeric values for Heart Disease Prediction.')
     #Code for prediction
     heart_diagnosis = ''
     
@@ -185,6 +213,5 @@ if(selected == "Parkinson's Prediction"):
     st.success(parkinsons_diagnosis)
         
 
-# For run step-1:  Run python file in dedicated terminal 
 # For run step-2:  python -m streamlit run webApp.py   
 # Learn streamlit: https://docs.streamlit.io/library/api-reference/write-magic/st.write 
