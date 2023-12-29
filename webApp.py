@@ -19,7 +19,7 @@ with st.sidebar:
                             "Parkinson's Prediction"],
                            icons=['activity', 'heart', 'person'],
                            default_index=0)
-
+    st.subheader('Copyright©2023 :blue[Bariul Munshi] :sunglasses:')
 #Diabetes Prediction Page
 if(selected == 'Diabetes Prediction'):
     
