@@ -3,26 +3,27 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 
 
-# Define the file paths
-diabetes_model_path = "/workspaces/multi-disease-prediction/Diabetes_RandomForest_model.sav"
-heart_disease_model_path = "/workspaces/multi-disease-prediction/heart_Adaboost_model.sav"
-parkinsons_model_path = "/workspaces/multi-disease-prediction/parkinsons_Stacking_Ensemble_model.sav"
+import os
+# Function to load models
+def load_model(model_path):
+    try:
+        return pickle.load(open(model_path, 'rb'))
+    except FileNotFoundError:
+        st.error(f"Error: The file {model_path} not found.")
+        return None
+# Get the current working directory
+current_dir = os.getcwd()
 
-# Load the models using try-except block to handle potential FileNotFoundError
-try:
-    diabetes_model = pickle.load(open(diabetes_model_path, 'rb'))
-except FileNotFoundError:
-    print(f"Error: The file {diabetes_model_path} not found.")
+# Define the relative file paths
+diabetes_model_path = "Diabetes_RandomForest_model.sav"
+heart_disease_model_path = "heart_Adaboost_model.sav"
+parkinsons_model_path = "parkinsons_Stacking_Ensemble_model.sav"
 
-try:
-    heart_disease_model = pickle.load(open(heart_disease_model_path, 'rb'))
-except FileNotFoundError:
-    print(f"Error: The file {heart_disease_model_path} not found.")
+# Load models using relative paths
+diabetes_model = load_model(os.path.join(current_dir, diabetes_model_path))
+heart_disease_model = load_model(os.path.join(current_dir, heart_disease_model_path))
+parkinsons_model = load_model(os.path.join(current_dir, parkinsons_model_path))
 
-try:
-    parkinsons_model = pickle.load(open(parkinsons_model_path, 'rb'))
-except FileNotFoundError:
-    print(f"Error: The file {parkinsons_model_path} not found.")
 
 
 with st.sidebar:
@@ -77,7 +78,7 @@ if(selected == 'Diabetes Prediction'):
     
     #Creating a button for prediction
     
-    if st.button('Diabetes Test Result'):
+    if st.button('Diabetes Test Result'):   
         diab_prediction = diabetes_model.predict([[Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age]])
         
         if (diab_prediction[0]==1): 
