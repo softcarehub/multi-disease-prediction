@@ -14,6 +14,7 @@ def load_model(model_path):
 # Get the current working directory
 current_dir = os.getcwd()
 
+
 # Define the relative file paths
 diabetes_model_path = "Diabetes_RandomForest_model.sav"
 heart_disease_model_path = "heart_Adaboost_model.sav"
@@ -23,6 +24,42 @@ parkinsons_model_path = "parkinsons_Stacking_Ensemble_model.sav"
 diabetes_model = load_model(os.path.join(current_dir, diabetes_model_path))
 heart_disease_model = load_model(os.path.join(current_dir, heart_disease_model_path))
 parkinsons_model = load_model(os.path.join(current_dir, parkinsons_model_path))
+
+import joblib
+
+# Save the models
+joblib.dump(diabetes_model, '/workspaces/multi-disease-prediction/Diabetes_RandomForest_model.joblib')
+joblib.dump(heart_disease_model, '/workspaces/multi-disease-prediction/heart_Adaboost_model.joblib')
+joblib.dump(parkinsons_model, '/workspaces/multi-disease-prediction/parkinsons_Stacking_Ensemble_model.joblib')
+import joblib
+
+# Function to load models
+def load_model(model_path):
+    try:
+        return joblib.load(model_path)
+    except FileNotFoundError:
+        print(f"Error: The file {model_path} not found.")
+        return None
+# Load the models using try-except block to handle potential FileNotFoundError
+diabetes_model_path = "/workspaces/multi-disease-prediction/Diabetes_RandomForest_model.joblib"
+heart_disease_model_path = "/workspaces/multi-disease-prediction/heart_Adaboost_model.joblib"
+parkinsons_model_path = "/workspaces/multi-disease-prediction/parkinsons_Stacking_Ensemble_model.joblib"
+
+try:
+    diabetes_model = load_model(diabetes_model_path)
+except FileNotFoundError:
+    print(f"Error: The file {diabetes_model_path} not found.")
+
+try:
+    heart_disease_model = load_model(heart_disease_model_path)
+except FileNotFoundError:
+    print(f"Error: The file {heart_disease_model_path} not found.")
+
+try:
+    parkinsons_model = load_model(parkinsons_model_path)
+except FileNotFoundError:
+    print(f"Error: The file {parkinsons_model_path} not found.")
+
 
 
 
