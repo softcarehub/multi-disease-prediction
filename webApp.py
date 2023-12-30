@@ -2,34 +2,23 @@ import pickle
 import streamlit as st
 from streamlit_option_menu import option_menu
 
-import os
-import joblib
+# Define the file paths
+diabetes_model_path = "/workspaces/multi-disease-prediction/Diabetes_RandomForest_model.sav"
+heart_disease_model_path = "/workspaces/multi-disease-prediction/heart_Adaboost_model.sav"
+parkinsons_model_path = "/workspaces/multi-disease-prediction/parkinsons_Stacking_Ensemble_model.sav"
 
 # Function to load models
 def load_model(model_path):
     try:
-        return joblib.load(model_path)
+        return pickle.load(open(model_path, 'rb'))
     except FileNotFoundError:
-        print(f"Error: The file {model_path} not found.")
+        st.error(f"Error: The file {model_path} not found.")
         return None
 
-# Get the current working directory
-current_dir = os.getcwd()
-
-# Define the relative file paths
-diabetes_model_path = "Diabetes_RandomForest_model.joblib"
-heart_disease_model_path = "heart_Adaboost_model.joblib"
-parkinsons_model_path = "parkinsons_Stacking_Ensemble_model.joblib"
-
-# Load models using relative paths
-diabetes_model = load_model(os.path.join(current_dir, diabetes_model_path))
-heart_disease_model = load_model(os.path.join(current_dir, heart_disease_model_path))
-parkinsons_model = load_model(os.path.join(current_dir, parkinsons_model_path))
-
-# Print statements for debugging
-print(f"Diabetes Model: {diabetes_model}")
-print(f"Heart Disease Model: {heart_disease_model}")
-print(f"Parkinson's Model: {parkinsons_model}")
+# Load models
+diabetes_model = load_model(diabetes_model_path)
+heart_disease_model = load_model(heart_disease_model_path)
+parkinsons_model = load_model(parkinsons_model_path)
 
 
 with st.sidebar:
