@@ -161,13 +161,12 @@ if(selected == 'Heart Disease Prediction'):
 
     
 #Parkinsons Prediction Page
-if(selected == "Parkinson's Prediction"):
+if selected == "Parkinson's Prediction":
     
     #Page title
     st.title('Parkinsons Prediction using ML')
-    
 
-        # Create columns for better UI with a maximum of 5 inputs per column
+    # Create columns for better UI with a maximum of 5 inputs per column
     col1, col2, col3, col4, col5 = st.columns(5)
 
     # Input fields in the first column
@@ -208,24 +207,19 @@ if(selected == "Parkinson's Prediction"):
         D2 = st.number_input('D2 (d2)', key='d2')
         PPE = st.number_input('PPE (ppe)', key='ppe')
 
-        
-    #Code for prediction
+    # Code for prediction
     parkinsons_diagnosis = ''
-        
-    #Creating a button for prediction
-        
+
+    # Creating a button for prediction
     if st.button('Parkinsons Test Result'):
-            parkinsons_prediction = parkinsons_model.predict([[fo, fhi, flo, Jitter_percent, Jitter_Abs, RAP, PPQ, DDP, Shimmer, Shimmer_dB, APQ3, APQ5, APQ, DDA, NHR, HNR, RPDE, DFA, spread1, spread2, D2, PPE]])
-            
-            if (parkinsons_prediction[0]==1):
-                parkinsons_diagnosis = 'The person is suffering from Parkinsons disease'
-                
-            else:
-                parkinsons_diagnosis = 'The person is Not suffering from Parkinsons disease'
-                
-                
+        parkinsons_prediction = parkinsons_model.predict([[fo, fhi, flo, Jitter_percent, Jitter_Abs, RAP, PPQ, DDP, Shimmer, Shimmer_dB, APQ3, APQ5, APQ, DDA, NHR, HNR, RPDE, DFA, spread1, spread2, D2, PPE]])
+
+        if (parkinsons_prediction[0]==1):
+            parkinsons_diagnosis = 'The person is suffering from Parkinsons disease'
+        else:
+            parkinsons_diagnosis = 'The person is Not suffering from Parkinsons disease'
+
     st.success(parkinsons_diagnosis)
         
 
 # For run step-2:  python -m streamlit run webApp.py   
-# Learn streamlit: https://docs.streamlit.io/library/api-reference/write-magic/st.write 
