@@ -84,14 +84,6 @@ if selected == 'Diabetes Prediction':
             
             
     st.success(diab_diagnosis)
-    if diabetes_model is not None:  # Check if the model is loaded successfully
-        diab_prediction = diabetes_model.predict([[Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age]])
-
-        if (diab_prediction[0] == 1):
-            diab_diagnosis = 'The person is Diabetic'
-        else:
-            diab_diagnosis = 'The person is Not Diabetic'
-        st.success(diab_diagnosis)
     
     
     
