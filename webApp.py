@@ -2,13 +2,6 @@ import pickle
 import streamlit as st
 from streamlit_option_menu import option_menu
 
-# Function to load models
-def load_model(model_path):
-    try:
-        return pickle.load(open(model_path, 'rb'))
-    except FileNotFoundError:
-        st.error(f"Error: The file {model_path} not found.")
-        return None
 
 # Define the file paths
 diabetes_model_path = "/workspaces/multi-disease-prediction/Diabetes_RandomForest_model.sav"
@@ -16,9 +9,21 @@ heart_disease_model_path = "/workspaces/multi-disease-prediction/heart_Adaboost_
 parkinsons_model_path = "/workspaces/multi-disease-prediction/parkinsons_Stacking_Ensemble_model.sav"
 
 # Load the models using try-except block to handle potential FileNotFoundError
-diabetes_model = load_model(diabetes_model_path)
-heart_disease_model = load_model(heart_disease_model_path)
-parkinsons_model = load_model(parkinsons_model_path)
+try:
+    diabetes_model = pickle.load(open(diabetes_model_path, 'rb'))
+except FileNotFoundError:
+    print(f"Error: The file {diabetes_model_path} not found.")
+
+try:
+    heart_disease_model = pickle.load(open(heart_disease_model_path, 'rb'))
+except FileNotFoundError:
+    print(f"Error: The file {heart_disease_model_path} not found.")
+
+try:
+    parkinsons_model = pickle.load(open(parkinsons_model_path, 'rb'))
+except FileNotFoundError:
+    print(f"Error: The file {parkinsons_model_path} not found.")
+
 
 # Sidebar
 with st.sidebar:
