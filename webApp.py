@@ -16,20 +16,9 @@ heart_disease_model_path = "/workspaces/multi-disease-prediction/heart_Adaboost_
 parkinsons_model_path = "/workspaces/multi-disease-prediction/parkinsons_Stacking_Ensemble_model.sav"
 
 # Load the models using try-except block to handle potential FileNotFoundError
-try:
-    diabetes_model = load_model(diabetes_model_path)
-except FileNotFoundError:
-    print(f"Error: The file {diabetes_model_path} not found.")
-
-try:
-    heart_disease_model = load_model(heart_disease_model_path)
-except FileNotFoundError:
-    print(f"Error: The file {heart_disease_model_path} not found.")
-
-try:
-    parkinsons_model = load_model(parkinsons_model_path)
-except FileNotFoundError:
-    print(f"Error: The file {parkinsons_model_path} not found.")
+diabetes_model = load_model(diabetes_model_path)
+heart_disease_model = load_model(heart_disease_model_path)
+parkinsons_model = load_model(parkinsons_model_path)
 
 # Sidebar
 with st.sidebar:
@@ -95,6 +84,14 @@ if selected == 'Diabetes Prediction':
             
             
     st.success(diab_diagnosis)
+    if diabetes_model is not None:  # Check if the model is loaded successfully
+        diab_prediction = diabetes_model.predict([[Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age]])
+
+        if (diab_prediction[0] == 1):
+            diab_diagnosis = 'The person is Diabetic'
+        else:
+            diab_diagnosis = 'The person is Not Diabetic'
+        st.success(diab_diagnosis)
     
     
     
